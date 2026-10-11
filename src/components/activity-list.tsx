@@ -41,6 +41,10 @@ export function ActivityList({ items, onSelect }: { items: Activity[]; onSelect?
               <Link to="/chat/$threadId" params={{ threadId: a.threadId }} className="flex items-center gap-3 py-3 hover:opacity-80">
                 {inner}
               </Link>
+            ) : !onSelect ? (
+              <Link to="/history" className="flex items-center gap-3 py-3 hover:opacity-80">
+                {inner}
+              </Link>
             ) : (
               <button onClick={() => onSelect?.(a)} className="flex w-full items-center gap-3 py-3 text-left hover:opacity-80">
                 {inner}
