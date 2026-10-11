@@ -17,7 +17,7 @@ import {
   PromptInputTools,
 } from "@/components/ai-elements/prompt-input";
 import { AiNotice, ChatMessage, Thinking, aiErrorMessage } from "@/components/ai-output";
-import { getSettings, getThread, saveThreadMessages } from "@/lib/store";
+import { getSettings, getThread, saveThreadMessages, useThreads } from "@/lib/store";
 
 export const Route = createFileRoute("/chat/$threadId")({
   component: ThreadPage,
@@ -48,6 +48,7 @@ function ChatWindow({ threadId }: { threadId: string }) {
     transport,
     onError: (e) => toast.error(aiErrorMessage(e)),
   });
+  const liveTitle = useThreads().find((t) => t.id === threadId)?.title;
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const busy = status === "submitted" || status === "streaming";
 
@@ -79,7 +80,7 @@ function ChatWindow({ threadId }: { threadId: string }) {
           <BrainCircuit className="size-4 text-primary-foreground" />
         </span>
         <div className="min-w-0">
-          <p className="truncate text-sm font-semibold">{thread.title}</p>
+          <p className="truncate text-sm font-semibold">{liveTitle ?? thread.title}</p>
           <p className="text-xs text-muted-foreground">MindFlow Assistant</p>
         </div>
       </div>
