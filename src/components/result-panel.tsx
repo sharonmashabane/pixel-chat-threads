@@ -15,7 +15,7 @@ export function ResultPanel({
   emptyText,
   filename,
 }: {
-  answer?: UIMessage;
+  answer?: UIMessage | undefined;
   busy: boolean;
   status: string;
   stop: () => void;
