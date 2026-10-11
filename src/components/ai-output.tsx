@@ -8,7 +8,7 @@ export function MessageParts({
   streaming,
 }: {
   message: UIMessage;
-  streaming?: boolean;
+  streaming?: boolean | undefined;
 }) {
   return (
     <>
@@ -17,7 +17,7 @@ export function MessageParts({
           return <MessageResponse key={i}>{part.text}</MessageResponse>;
         if (part.type === "reasoning" && part.text)
           return (
-            <Reasoning key={i} isStreaming={streaming && i === message.parts.length - 1}>
+            <Reasoning key={i} isStreaming={!!streaming && i === message.parts.length - 1}>
               <ReasoningTrigger />
               <ReasoningContent>{part.text}</ReasoningContent>
             </Reasoning>
@@ -28,7 +28,7 @@ export function MessageParts({
   );
 }
 
-export function ChatMessage({ message, streaming }: { message: UIMessage; streaming?: boolean }) {
+export function ChatMessage({ message, streaming }: { message: UIMessage; streaming?: boolean | undefined }) {
   return (
     <Message from={message.role}>
       <MessageContent>

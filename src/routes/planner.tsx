@@ -45,15 +45,15 @@ function PlannerPage() {
   const set = <K extends keyof Task>(k: K, v: Task[K]) => setDraft((d) => ({ ...d, [k]: v }));
 
   const addTask = () => {
-    if (!draft.title.trim()) return toast.error("Please enter a task title.");
-    if (!draft.duration.trim()) return toast.error("Please enter an estimated duration.");
+    if (!draft.title.trim()) { toast.error("Please enter a task title."); return; }
+    if (!draft.duration.trim()) { toast.error("Please enter an estimated duration."); return; }
     setTasks((t) => [...t, { ...draft, title: draft.title.trim() }]);
     setDraft(emptyTask());
   };
 
   const generate = () => {
-    if (tasks.length === 0) return toast.error("Add at least one task first.");
-    if (!hours.trim()) return toast.error("Please enter your available working hours.");
+    if (tasks.length === 0) { toast.error("Add at least one task first."); return; }
+    if (!hours.trim()) { toast.error("Please enter your available working hours."); return; }
     const list = tasks
       .map(
         (t, i) =>

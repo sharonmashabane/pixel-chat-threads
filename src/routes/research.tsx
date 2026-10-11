@@ -43,8 +43,8 @@ function ResearchPage() {
   const needsText = type !== "topic";
 
   const submit = () => {
-    if (!topic.trim() && !needsText) return toast.error("Please enter a topic or question.");
-    if (needsText && text.trim().length < 50) return toast.error("Please paste at least a short paragraph of text (50+ characters).");
+    if (!topic.trim() && !needsText) { toast.error("Please enter a topic or question."); return; }
+    if (needsText && text.trim().length < 50) { toast.error("Please paste at least a short paragraph of text (50+ characters)."); return; }
     const task =
       type === "topic"
         ? `Research this topic: "${topic.trim()}".`

@@ -18,7 +18,7 @@ export const Route = createFileRoute("/api/ai")({
   server: {
     handlers: {
       POST: async ({ request }) => {
-        const apiKey = process.env.LOVABLE_API_KEY;
+        const apiKey = process.env["LOVABLE_API_KEY"];
         if (!apiKey) return json(500, "AI service is not configured.");
 
         let body: { messages?: UIMessage[]; mode?: string; style?: string };
